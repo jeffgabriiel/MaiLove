@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Love 🤍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 120px;
+        }
+
+        /* Efeito de partículas/hearts no fundo */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 0.5rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Phone Component Styles */
+        .phone-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 450px;
+            width: 250px;
+            border: 4px solid black;
+            border-radius: 1rem;
+            background-color: #000;
+            box-shadow: 5px 5px 2.5px 6px rgb(209, 218, 218);
+            margin: 0.25rem auto;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 20px;
+            left: 4px;
+            right: 4px;
+            bottom: 50px;
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .phone-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .phone-time {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            color: white;
+            z-index: 3;
+            font-weight: bold;
+            text-shadow: 0 1px 2px #000000;
+        }
+
+        .phone-date {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: white;
+            z-index: 3;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .phone-fingerprint {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+        }
+
+        .phone-icon {
+            position: absolute;
+            bottom: 10px;
+            padding: 4px;
+            background-color: rgb(209, 218, 218);
+            border-radius: 6px;
+            z-index: 3;
+        }
+
+        .phone-icon.phone-left {
+            left: 10px;
+        }
+
+        .phone-icon.phone-right {
+            right: 10px;
+        }
+
+        .phone-top-border {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 1px solid black;
+            background-color: black;
+            width: 80px;
+            height: 8px;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            z-index: 4;
+        }
+
+        .phone-right-border {
+            position: absolute;
+            border: 4px solid black;
+            right: -8px;
+            border-radius: 0.375rem;
+            z-index: 4;
+        }
+
+        .phone-right-border.top {
+            top: 56px;
+            height: 28px;
+        }
+
+        /* Seção Casamento */
+        .wedding-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .wedding-title {
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wedding-title .ring-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 50%;
+        }
+
+        .wedding-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .wedding-content .message {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Mensagem Final */
+        .final-message {
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Card Especial Dia 3 */
+        .special-day-card {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .special-day-card.show {
+            display: block;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .special-day-title {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .special-day-subtitle {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .special-day-message {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .special-time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .special-time-unit {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .special-time-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .special-time-label {
+            font-size: 0.85rem;
+            color: white;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .special-day-footer {
+            font-size: 1.3rem;
+            color: white;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-top: 2rem;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Seção Título Romântico */
+        .love-title-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem 1rem;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .love-title-section h2 {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* Carrossel Styles */
+        .carousel-section {
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-section {
+                margin: 1rem auto 0;
+            }
+
+            .carousel-container {
+                height: 250px;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            margin-bottom: 0.5rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            min-width: 120px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            opacity: 0.9;
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .heart {
+            display: inline-block;
+            font-size: 2rem;
+            color: #ff6b9d;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin: 0 0.5rem;
+        }
+
+        /* From Uiverse.io by SouravBandyopadhyay */
+        .cssload-main {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cssload-main * {
+            font-size: 62px;
+        }
+
+        .cssload-heart {
+            animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -o-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -ms-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -webkit-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -moz-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            position: relative;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .cssload-heartL {
+            width: 1em;
+            height: 1em;
+            border: 1px solid rgb(252, 0, 101);
+            background-color: rgb(252, 0, 101);
+            content: '';
+            position: absolute;
+            display: block;
+            border-radius: 100%;
+            animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -o-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -ms-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -webkit-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -moz-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            transform: translate(-28px, -27px);
+            -o-transform: translate(-28px, -27px);
+            -ms-transform: translate(-28px, -27px);
+            -webkit-transform: translate(-28px, -27px);
+            -moz-transform: translate(-28px, -27px);
+        }
+
+        .cssload-heartR {
+            width: 1em;
+            height: 1em;
+            border: 1px solid rgb(252, 0, 101);
+            background-color: rgb(252, 0, 101);
+            content: '';
+            position: absolute;
+            display: block;
+            border-radius: 100%;
+            transform: translate(28px, -27px);
+            -o-transform: translate(28px, -27px);
+            -ms-transform: translate(28px, -27px);
+            -webkit-transform: translate(28px, -27px);
+            -moz-transform: translate(28px, -27px);
+            animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -o-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -ms-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -webkit-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -moz-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+        }
+
+        .cssload-square {
+            width: 1em;
+            height: 1em;
+            border: 1px solid rgb(252, 0, 101);
+            background-color: rgb(252, 0, 101);
+            position: relative;
+            display: block;
+            content: '';
+            transform: scale(1) rotate(-45deg);
+            -o-transform: scale(1) rotate(-45deg);
+            -ms-transform: scale(1) rotate(-45deg);
+            -webkit-transform: scale(1) rotate(-45deg);
+            -moz-transform: scale(1) rotate(-45deg);
+            animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -o-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -ms-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -webkit-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -moz-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+        }
+
+        .cssload-shadow {
+            content: '';
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            width: 1em;
+            height: .24em;
+            background-color: rgb(215, 215, 215);
+            border: 1px solid rgb(215, 215, 215);
+            border-radius: 50%;
+            animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -o-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -ms-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -webkit-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+            -moz-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+        }
+
+        @keyframes cssload-square {
+            50% {
+                border-radius: 100%;
+                transform: scale(0.5) rotate(-45deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        @-o-keyframes cssload-square {
+            50% {
+                border-radius: 100%;
+                -o-transform: scale(0.5) rotate(-45deg);
+            }
+
+            100% {
+                -o-transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        @-ms-keyframes cssload-square {
+            50% {
+                border-radius: 100%;
+                -ms-transform: scale(0.5) rotate(-45deg);
+            }
+
+            100% {
+                -ms-transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-square {
+            50% {
+                border-radius: 100%;
+                -webkit-transform: scale(0.5) rotate(-45deg);
+            }
+
+            100% {
+                -webkit-transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        @-moz-keyframes cssload-square {
+            50% {
+                border-radius: 100%;
+                -moz-transform: scale(0.5) rotate(-45deg);
+            }
+
+            100% {
+                -moz-transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        @keyframes cssload-heart {
+            50% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(720deg);
+            }
+        }
+
+        @-o-keyframes cssload-heart {
+            50% {
+                -o-transform: rotate(360deg);
+            }
+
+            100% {
+                -o-transform: rotate(720deg);
+            }
+        }
+
+        @-ms-keyframes cssload-heart {
+            50% {
+                -ms-transform: rotate(360deg);
+            }
+
+            100% {
+                -ms-transform: rotate(720deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-heart {
+            50% {
+                -webkit-transform: rotate(360deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(720deg);
+            }
+        }
+
+        @-moz-keyframes cssload-heart {
+            50% {
+                -moz-transform: rotate(360deg);
+            }
+
+            100% {
+                -moz-transform: rotate(720deg);
+            }
+        }
+
+        @keyframes cssload-heartL {
+            60% {
+                transform: scale(0.4);
+            }
+        }
+
+        @-o-keyframes cssload-heartL {
+            60% {
+                -o-transform: scale(0.4);
+            }
+        }
+
+        @-ms-keyframes cssload-heartL {
+            60% {
+                -ms-transform: scale(0.4);
+            }
+        }
+
+        @-webkit-keyframes cssload-heartL {
+            60% {
+                -webkit-transform: scale(0.4);
+            }
+        }
+
+        @-moz-keyframes cssload-heartL {
+            60% {
+                -moz-transform: scale(0.4);
+            }
+        }
+
+        @keyframes cssload-heartR {
+            40% {
+                transform: scale(0.4);
+            }
+        }
+
+        @-o-keyframes cssload-heartR {
+            40% {
+                -o-transform: scale(0.4);
+            }
+        }
+
+        @-ms-keyframes cssload-heartR {
+            40% {
+                -ms-transform: scale(0.4);
+            }
+        }
+
+        @-webkit-keyframes cssload-heartR {
+            40% {
+                -webkit-transform: scale(0.4);
+            }
+        }
+
+        @-moz-keyframes cssload-heartR {
+            40% {
+                -moz-transform: scale(0.4);
+            }
+        }
+
+        @keyframes cssload-shadow {
+            50% {
+                transform: scale(0.5);
+                border-color: rgb(228, 228, 228);
+            }
+        }
+
+        @-o-keyframes cssload-shadow {
+            50% {
+                -o-transform: scale(0.5);
+                border-color: rgb(228, 228, 228);
+            }
+        }
+
+        @-ms-keyframes cssload-shadow {
+            50% {
+                -ms-transform: scale(0.5);
+                border-color: rgb(228, 228, 228);
+            }
+        }
+
+        @-webkit-keyframes cssload-shadow {
+            50% {
+                -webkit-transform: scale(0.5);
+                border-color: rgb(228, 228, 228);
+            }
+        }
+
+        @-moz-keyframes cssload-shadow {
+            50% {
+                -moz-transform: scale(0.5);
+                border-color: rgb(228, 228, 228);
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .love-title-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .love-title-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .special-day-card {
+                padding: 1.5rem;
+            }
+
+            .special-day-title {
+                font-size: 1.6rem;
+            }
+
+            .special-day-subtitle {
+                font-size: 1rem;
+            }
+
+            .special-day-message {
+                font-size: 1.2rem;
+            }
+
+            .special-day-footer {
+                font-size: 1.1rem;
+            }
+
+            .special-time-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.8rem;
+            }
+
+            .special-time-value {
+                font-size: 1.5rem;
+            }
+
+            .special-time-label {
+                font-size: 0.75rem;
+            }
+
+            .wedding-title {
+                font-size: 2rem;
+            }
+
+            .wedding-title .ring-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .countdown {
+                gap: 0.8rem;
+                flex-wrap: nowrap;
+            }
+
+            .time-unit {
+                min-width: 80px;
+                padding: 1.2rem 0.9rem;
+            }
+
+            .time-value {
+                font-size: 2.2rem;
+            }
+
+            .time-label {
+                font-size: 0.8rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .love-title-section {
+                padding: 1.5rem 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .love-title-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .wedding-title {
+                font-size: 1.8rem;
+            }
+
+            .wedding-title .ring-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .special-day-card {
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+
+            .special-day-title {
+                font-size: 1.4rem;
+            }
+
+            .special-day-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .special-day-message {
+                font-size: 1rem;
+            }
+
+            .special-day-footer {
+                font-size: 0.95rem;
+                margin-top: 1.5rem;
+            }
+
+            .special-time-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+            }
+
+            .special-time-unit {
+                padding: 0.8rem;
+            }
+
+            .special-time-value {
+                font-size: 1.3rem;
+            }
+
+            .special-time-label {
+                font-size: 0.7rem;
+            }
+
+            .final-message {
+                font-size: 0.85rem;
+                margin-top: 2rem;
+            }
+
+            .countdown {
+                gap: 0.5rem;
+                flex-wrap: nowrap;
+            }
+
+            .time-unit {
+                min-width: 55px;
+                padding: 0.8rem 0.5rem;
+            }
+
+            .time-value {
+                font-size: 1.5rem;
+            }
+
+            .time-label {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+
+            .message {
+                font-size: 0.95rem;
+            }
+
+            .phone-container {
+                height: 320px;
+                width: 170px;
+            }
+
+            .phone-time {
+                font-size: 1.4rem;
+                top: 25px;
+            }
+
+            .phone-date {
+                font-size: 9px;
+                top: 50px;
+            }
+
+            .phone-screen {
+                top: 15px;
+                bottom: 45px;
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem 2rem;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-countdown {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .footer-time-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-time-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        .footer-separator {
+            font-size: 1.2rem;
+            opacity: 0.6;
+            margin: 0 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 140px;
+            }
+
+            footer {
+                padding: 1rem;
+            }
+
+            .footer-title {
+                font-size: 0.9rem;
+            }
+
+            .footer-countdown {
+                gap: 0.5rem;
+            }
+
+            .footer-time-unit {
+                min-width: 50px;
+            }
+
+            .footer-time-value {
+                font-size: 1.2rem;
+            }
+
+            .footer-time-label {
+                font-size: 0.65rem;
+            }
+
+            .footer-separator {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-bottom: 160px;
+            }
+
+            .footer-countdown {
+                gap: 0.3rem;
+            }
+
+            .footer-time-unit {
+                min-width: 45px;
+            }
+
+            .footer-time-value {
+                font-size: 1rem;
+            }
+
+            .footer-time-label {
+                font-size: 0.6rem;
+            }
+
+            .footer-separator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dedicado ao melhor da minha vida</h1>
+
+        <div class="cssload-main">
+            <div class="cssload-heart">
+                <span class="cssload-heartL"></span>
+                <span class="cssload-heartR"></span>
+                <span class="cssload-square"></span>
+            </div>
+            <div class="cssload-shadow"></div>
+        </div>
+
+        <!-- Card Especial Dia 3 -->
+        <div class="special-day-card" id="specialDayCard">
+            <h2 class="special-day-title">Feliz Dia Pra Nós! <span class="heart">🤍</span></h2>
+            <p class="special-day-subtitle">Desde 03 de março de 2022</p>
+            <p class="special-day-message">Nosso tempo juntos:</p>
+            <div class="special-time-grid">
+                <div class="special-time-unit">
+                    <span class="special-time-value" id="specialMonths">0</span>
+                    <span class="special-time-label">Meses</span>
+                </div>
+                <div class="special-time-unit">
+                    <span class="special-time-value" id="specialDays">0</span>
+                    <span class="special-time-label">Dias</span>
+                </div>
+                <div class="special-time-unit">
+                    <span class="special-time-value" id="specialHours">0</span>
+                    <span class="special-time-label">Horas</span>
+                </div>
+                <div class="special-time-unit">
+                    <span class="special-time-value" id="specialMinutes">0</span>
+                    <span class="special-time-label">Minutos</span>
+                </div>
+                <div class="special-time-unit">
+                    <span class="special-time-value" id="specialSeconds">0</span>
+                    <span class="special-time-label">Segundos</span>
+                </div>
+            </div>
+            <p class="special-day-footer">E ainda assim, não é suficiente para expressar o quanto você significa para
+                mim <span class="heart">🤍</span></p>
+        </div>
+
+        <!-- Seção Título Romântico -->
+        <div class="love-title-section">
+            <h2>A melhor parte da minha vida é ter você <span class="heart">🤍</span></h2>
+
+            <!-- Carrossel de Imagens -->
+            <div class="carousel-section">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="asset/img/carrossel/0.jpg" alt="Foto 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/1.webp" alt="Foto 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/2.jpg" alt="Foto 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/3.jpg" alt="Foto 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/4.webp" alt="Foto 5">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/6.webp" alt="Foto 6">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/7.jpg" alt="Foto 7">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/8.jpg" alt="Foto 8">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="asset/img/carrossel/9.jpg" alt="Foto 9">
+                    </div>
+                </div>
+                <div class="carousel-indicators" id="carouselIndicators"></div>
+            </div>
+        </div>
+
+        <!-- Seção Para o Casamento -->
+        <div class="wedding-section">
+            <h2 class="wedding-title">Nosso Grande Dia <img src="asset/img/anel.png" alt="Anel" class="ring-img"></h2>
+            <div class="wedding-content">
+                <!-- Componente Celular -->
+                <div class="phone-container">
+                    <span class="phone-top-border"></span>
+                    <div class="phone-screen">
+                        <video class="phone-video" autoplay loop muted playsinline>
+                            <source src="asset/video/jogando_buque.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <p class="phone-time">12:00</p>
+                    <p class="phone-date">Sáb, 21 de Março</p>
+                    <svg class="phone-fingerprint" width="26px" height="26px" viewBox="0 0 0.488 0.488" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.409 0.114a0.196 0.196 0 0 1 0.027 0.122v0.024c0 0.026 0.007 0.051 0.019 0.073M0.146 0.212c0 -0.026 0.01 -0.051 0.028 -0.069a0.096 0.096 0 0 1 0.068 -0.029c0.026 0 0.05 0.01 0.068 0.029s0.028 0.043 0.028 0.069v0.024c0 0.053 0.017 0.104 0.048 0.146m-0.145 -0.17v0.049A0.343 0.343 0 0 0 0.303 0.455M0.146 0.309A0.442 0.442 0 0 0 0.189 0.455m-0.118 -0.049c-0.016 -0.055 -0.024 -0.113 -0.022 -0.17V0.212a0.195 0.195 0 0 1 0.026 -0.098 0.194 0.194 0 0 1 0.071 -0.072 0.192 0.192 0 0 1 0.194 0"
+                            stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-width="0.0325">
+                        </path>
+                    </svg>
+                    <svg class="phone-icon phone-right" width="24" height="24" viewBox="0 0 0.72 0.72" version="1.2"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M.57.18H.522L.492.15A.1.1 0 0 0 .42.12H.3a.1.1 0 0 0-.072.03l-.03.03H.15a.09.09 0 0 0-.09.09v.24C.06.56.1.6.15.6h.42C.62.6.66.56.66.51V.27A.09.09 0 0 0 .57.18m-.21.3a.105.105 0 1 1 0-.21.105.105 0 0 1 0 .21M.54.339a.039.039 0 1 1 0-.078.039.039 0 0 1 0 .078">
+                        </path>
+                    </svg>
+                    <svg class="phone-icon phone-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        xml:space="preserve" width="24" height="24">
+                        <path fill="none" stroke="#000" stroke-width="1.5" stroke-miterlimit="10"
+                            d="m10.2 6.375-3.075-3.15c-.375-.3-.9-.3-1.275 0l-2.325 2.4c-.525.45-.675 1.2-.45 1.8.6 1.725 2.175 5.175 5.25 8.25s6.525 4.575 8.25 5.25c.675.225 1.35.075 1.875-.375l2.325-2.325c.375-.375.375-.9 0-1.275L17.7 13.875c-.375-.375-.9-.375-1.275 0L14.55 15.75s-2.1-.9-3.75-2.475-2.475-3.75-2.475-3.75L10.2 7.65c.375-.375.375-.975 0-1.275z">
+                        </path>
+                    </svg>
+                    <span class="phone-right-border top"></span>
+                </div>
+
+                <!-- Contador -->
+                <div class="countdown" id="countdown">
+                    <div class="time-unit">
+                        <span class="time-value" id="days">00</span>
+                        <span class="time-label">Dias</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-value" id="hours">00</span>
+                        <span class="time-label">Horas</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-value" id="minutes">00</span>
+                        <span class="time-label">Minutos</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-value" id="seconds">00</span>
+                        <span class="time-label">Segundos</span>
+                    </div>
+                </div>
+
+                <p class="message">Contando cada segundo para viver ao seu lado</p>
+            </div>
+        </div>
+        
+        <p class="final-message">Te amo, pequena <span class="heart">🤍</span></p>
+    </div>
+
+    <script>
+        // Card Especial Dia 3
+        (function () {
+            const specialCard = document.getElementById('specialDayCard');
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+
+            // Verifica se é dia 3 do mês
+            if (dayOfMonth === 3) {
+                specialCard.classList.add('show');
+
+                // Data inicial: 03 de março de 2022
+                const startDate = new Date('2022-03-03T00:00:00').getTime();
+
+                function updateSpecialTime() {
+                    const startDate = new Date('2022-03-03T00:00:00').getTime();
+                    const now = new Date().getTime();
+                    const diff = now - startDate;
+
+                    // Calcular tempo total em diferentes unidades
+                    const totalSeconds = Math.floor(diff / 1000);
+                    const totalMinutes = Math.floor(totalSeconds / 60);
+                    const totalHours = Math.floor(totalMinutes / 60);
+                    const totalDays = Math.floor(totalHours / 24);
+
+                    // Calcular meses totais (aproximado)
+                    const startDateObj = new Date('2022-03-03T00:00:00');
+                    const nowDateObj = new Date();
+                    let totalMonths = (nowDateObj.getFullYear() - startDateObj.getFullYear()) * 12;
+                    totalMonths += nowDateObj.getMonth() - startDateObj.getMonth();
+                    // Ajustar se o dia atual é menor que o dia inicial
+                    if (nowDateObj.getDate() < startDateObj.getDate()) {
+                        totalMonths--;
+                    }
+
+                    // Formatar números com separador de milhar
+                    function formatNumber(num) {
+                        return num.toLocaleString('pt-BR');
+                    }
+
+                    document.getElementById('specialMonths').textContent = formatNumber(totalMonths);
+                    document.getElementById('specialDays').textContent = formatNumber(totalDays);
+                    document.getElementById('specialHours').textContent = formatNumber(totalHours);
+                    document.getElementById('specialMinutes').textContent = formatNumber(totalMinutes);
+                    document.getElementById('specialSeconds').textContent = formatNumber(totalSeconds);
+                }
+
+                // Atualizar imediatamente e depois a cada segundo
+                updateSpecialTime();
+                setInterval(updateSpecialTime, 1000);
+            }
+        })();
+
+        // Carrossel Automático
+        (function () {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            // Criar indicadores
+            const indicatorsContainer = document.getElementById('carouselIndicators');
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator' + (index === 0 ? ' active' : '');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+
+                const newIndicators = document.querySelectorAll('.carousel-indicator');
+                newIndicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === index);
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                showSlide(currentSlide);
+            }
+
+            // Trocar slide automaticamente a cada 4 segundos
+            setInterval(nextSlide, 2500);
+        })();
+
+        // Configure a data alvo aqui (ano, mês-1, dia, hora, minuto, segundo)
+        // Exemplo: 15 de dezembro de 2024 às 18:00
+        const targetDate = new Date('2026-03-21T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <h1>Chegou o Momento! <span class="heart">💕</span></h1>
+                    <p class="subtitle">O dia especial finalmente chegou!</p>
+                `;
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Atualiza a cada segundo
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Contador do footer para 21 de março de 2026
+        const footerTargetDate = new Date('2026-03-21T00:00:00').getTime();
+
+        function updateFooterCountdown() {
+            const now = new Date().getTime();
+            const distance = footerTargetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('footerDays').textContent = '000';
+                document.getElementById('footerHours').textContent = '00';
+                document.getElementById('footerMinutes').textContent = '00';
+                document.getElementById('footerSeconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('footerDays').textContent = String(days).padStart(3, '0');
+            document.getElementById('footerHours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('footerMinutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('footerSeconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Atualiza o contador do footer a cada segundo
+        updateFooterCountdown();
+        setInterval(updateFooterCountdown, 1000);
+    </script>
+</body>
+
+</html>
